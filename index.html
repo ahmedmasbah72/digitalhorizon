@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Professionnel - Développeur Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ou pour un PNG -->
+    <link rel="icon" href="images/icon.png" type="image/png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="module">
+        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+      
+        emailjs.init('myet7XWcF2t1qSIs_');
+      
+        document.addEventListener("DOMContentLoaded", () => {
+          const form = document.getElementById("contact-form");
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            emailjs.sendForm("service_clc8u6a", "template_dvpqq9b", form)
+              .then(() => {
+                alert("Message envoyé !");
+                form.reset();
+              })
+              .catch((err) => {
+                alert("Erreur : " + JSON.stringify(err));
+              });
+          });
+        });
+      </script>
+      
+    
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#accueil">
+                    <img src="images/icon.png" alt="Logo Portfolio" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="#apropos" class="nav-link">À propos</a></li>
+                <li><a href="#competences" class="nav-link">Compétences</a></li>
+                <li><a href="#projets" class="nav-link">Projets</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="cv.html" class="nav-link">CV</a></li>
+                
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Accueil -->
+    <section id="accueil" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-name">Ahmed Masbah</h1>
+                    <h2 class="hero-title">Développeur Digital</h2>
+                    <p class="hero-subtitle">Plus de 3 ans d'expérience dans le développement digital</p>
+                    <p class="hero-description">Spécialisé en développement web et mobile, passionné par l'innovation digitale et l'optimisation des performances</p>
+                    <div class="hero-buttons">
+                        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+                        <a href="#contact" class="btn btn-secondary">Me contacter</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="images/ahmed.png" alt="Photo de profil Ahmed Masbah" class="profile-photo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section À propos -->
+    <section id="apropos" class="about">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Développeur digital passionné avec plus de 3 ans d'expérience, je me spécialise dans la création de solutions web et mobile innovantes. Mon approche combine rigueur technique et créativité pour livrer des projets performants et esthétiques.</p>
+                    <p>Mes domaines d'expertise incluent le développement frontend avec React et JavaScript, le backend avec PHP/Laravel et Python/Django, ainsi que la gestion de bases de données MySQL. Je privilégie une approche méthodique et collaborative, toujours orientée vers les résultats.</p>
+                    <p>Mes valeurs : rigueur, créativité, autonomie et amélioration continue. Je crois fermement que la technologie doit servir l'humain et créer de la valeur ajoutée.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-number">3+</span>
+                        <span class="stat-label">Années d'expérience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Projets réalisés</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Clients satisfaits</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Compétences -->
+    <section id="competences" class="skills">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-php"></i>
+                            <span>PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-laravel"></i>
+                            <span>Laravel</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-python"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-django"></i>
+                            <span>Django</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Base de données</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>MySQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>SQLite</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Outils</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-code"></i>
+                            <span>VS Code</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Postman</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Section Projets -->
+<section id="projets" class="projects">
+    <div class="container">
+        <h2 class="section-title">Projets récents</h2>
+        <div class="projects-grid">
+            <!-- Projet 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/nce.png" alt="NCE Admin Project" class="project-photo">
+                </div>
+                <div class="project-content">
+                    <h3>NCE-Admin</h3>
+                    <p>Plateforme pour générer des devis avec les informations et les photos des produits.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/ahmedmasbah72/nce-admin" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        <!-- <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Démo</a> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projet 2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/biblio.png" alt="Application Mobile" class="project-photo">
+                </div>
+                <div class="project-content">
+                    <h3>Biblio</h3>
+                    <p>Application de gestion des réservation au sein d'une bibliothèque.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React Native</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">SQL lite</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/ahmedmasbah72/biblio-django" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        <!-- <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Démo</a> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projet 3 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="images/tbda.png" alt="Dashboard Analytics" class="project-photo">
+                </div>
+                <div class="project-content">
+                    <h3>Site web E-comh3>
+                    <p>Tableau de bord analytique en temps réel avec visualisations interactives et rapports automatisés.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">Laravel</span>
+                        <span class="tech-tag">MySql</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/ahmedmasbah72/tabouda-coding" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        <!-- <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Démo</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Restons en contact</h3>
+                    <p>N'hésitez pas à me contacter pour discuter de vos projets ou pour toute collaboration.</p>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>ahmedmasbah692@email.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+212 6 05 55 46 08</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <a href="https://www.linkedin.com/in/ahmed-masbah-61186535b/" target="_blank">AHMED MASBAH</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <a href="https://github.com/ahmedmasbah72" target="_blank">ahmedmasbah72</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <!-- <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Sujet" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Votre message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                    </form> -->
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" name="user_name" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="user_email" placeholder="Votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="Sujet" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                        <input type="hidden" name="time">
+
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative bg-gradient-to-r from-blue-600 to-indigo-800 text-white pt-20 pb-10">
+        <!-- Wave divider -->
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0 text-center md:text-left">
+                    <a href="#accueil" class="flex items-center justify-center md:justify-start">
+                        <img src="images/icon.png" alt="Logo Portfolio" class="h-50 w-40 mr-3">
+                        <!-- <span class="text-2xl font-bold">Ahmed Masbah</span> -->
+                    </a>
+                    <!-- <p class="mt-4 max-w-md">Développeur digital passionné par la création de solutions web et mobile innovantes.</p> -->
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Navigation</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#accueil" class="hover:text-blue-200 transition">Accueil</a></li>
+                            <li><a href="#apropos" class="hover:text-blue-200 transition">À propos</a></li>
+                            <li><a href="#competences" class="hover:text-blue-200 transition">Compétences</a></li>
+                            <li><a href="#projets" class="hover:text-blue-200 transition">Projets</a></li>
+                            <li><a href="#contact" class="hover:text-blue-200 transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4">Liens utiles</h3>
+                        <ul class="space-y-2">
+                            <li><a href="cv.html" target="_blank" class="hover:text-blue-200 transition">CV</a></li>
+                            <!-- <li><a href="#" class="hover:text-blue-200 transition">Blog</a></li>
+                            <li><a href="#" class="hover:text-blue-200 transition">Mentions légales</a></li>
+                            <li><a href="#" class="hover:text-blue-200 transition">Politique de confidentialité</a></li> -->
+                        </ul>
+                    </div>
+                    
+                    <div class="col-span-2 md:col-span-1">
+                        <h3 class="text-lg font-semibold mb-4">Réseaux sociaux</h3>
+                        <div class="flex space-x-4 justify-center md:justify-start">
+                            <a href="https://www.linkedin.com/in/ahmed-masbah-61186535b/" target="_blank" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/ahmedmasbah72" target="_blank" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://x.com/AhmedMasbah10" target="_blank"  class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/digital.horizon72/" target="_blank " class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <!-- <div class="mt-6">
+                            <h4 class="font-medium mb-2">Newsletter</h4>
+                            <div class="flex">
+                                <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l focus:outline-none text-gray-800 w-full">
+                                <button class="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-r transition">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-400 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2025 Digital Horizon . Tous droits réservés.</p>
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="text-sm hover:text-blue-200 mr-4">Conditions d'utilisation</a>
+                    <a href="#" class="text-sm hover:text-blue-200">Politique de cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
