@@ -13,28 +13,178 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="module">
-        import emailjs from 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-      
-        emailjs.init('myet7XWcF2t1qSIs_');
-      
-        document.addEventListener("DOMContentLoaded", () => {
-          const form = document.getElementById("contact-form");
-          form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            emailjs.sendForm("service_clc8u6a", "template_dvpqq9b", form)
-              .then(() => {
-                alert("Message envoyé !");
-                form.reset();
-              })
-              .catch((err) => {
-                alert("Erreur : " + JSON.stringify(err));
-              });
-          });
-        });
-      </script>
-      
+    <script>
+        // Initialisation EmailJS
+        (function(){
+            emailjs.init('myet7XWcF2t1qSIs_');
+        })();
+    </script>
     
+    <style>
+        /* Styles pour le popup de screenshots */
+        .view-screenshots {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .project-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-card:hover .view-screenshots {
+            opacity: 1;
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Styles du Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .popup-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .popup-body {
+            padding: 2rem;
+        }
+
+        .project-description {
+            margin-bottom: 2rem;
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .screenshot-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.02);
+        }
+
+        .screenshot-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 1rem;
+            background: #f8f9fa;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .popup-content {
+                margin: 20px;
+                max-width: calc(100vw - 40px);
+            }
+            
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .popup-header {
+                padding: 1rem 1.5rem;
+            }
+            
+            .popup-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -43,7 +193,7 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="#accueil">
-                    <img src="images/icon.png" alt="Logo Portfolio" class="logo-img">
+                    <img src="images/icon2.png" alt="Logo Portfolio" class="logo-img">
                 </a>
             </div>
             <ul class="nav-menu">
@@ -53,7 +203,6 @@
                 <li><a href="#projets" class="nav-link">Projets</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
                 <li><a href="cv.html" class="nav-link">CV</a></li>
-                
             </ul>
             <div class="hamburger">
                 <span class="bar"></span>
@@ -103,7 +252,7 @@
                         <span class="stat-number">7+</span>
                         <span class="stat-label">Projets réalisés</span>
                     </div>
-                    <div class="stat">git add .
+                    <div class="stat">
                         <span class="stat-number">100%</span>
                         <span class="stat-label">Clients satisfaits</span>
                     </div>
@@ -197,73 +346,84 @@
         </div>
     </section>
 
-<!-- Section Projets -->
-<section id="projets" class="projects">
-    <div class="container">
-        <h2 class="section-title">Projets récents</h2>
-        <div class="projects-grid">
-            <!-- Projet 1 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/nce.png" alt="NCE Admin Project" class="project-photo">
-                </div>
-                <div class="project-content">
-                    <h3>NCE-Admin</h3>
-                    <p>Plateforme pour générer des devis avec les informations et les photos des produits.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Laravel</span>
-                        <span class="tech-tag">MySQL</span>
+    <!-- Section Projets -->
+    <section id="projets" class="projects">
+        <div class="container">
+            <h2 class="section-title">Projets récents</h2>
+            <div class="projects-grid">
+                <!-- Projet 1 -->
+                <div class="project-card" data-project="nce">
+                    <div class="project-image">
+                        <img src="images/nce.png" alt="NCE Admin Project" class="project-photo">
+                        <div class="view-screenshots">
+                            <i class="fas fa-images"></i> Voir les captures
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://github.com/ahmedmasbah72/nce-admin" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        <!-- <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Démo</a> -->
+                    <div class="project-content">
+                        <h3>NCE-Admin</h3>
+                        <p>Plateforme pour générer des devis avec les informations et les photos des produits.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ahmedmasbah72/nce-admin" target="_blank" class="project-link" onclick="event.stopPropagation()">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Projet 2 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/biblio.png" alt="Application Mobile" class="project-photo">
-                </div>
-                <div class="project-content">
-                    <h3>Biblio</h3>
-                    <p>Application de gestion des réservation au sein d'une bibliothèque.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">React Native</span>
-                        <span class="tech-tag">Django</span>
-                        <span class="tech-tag">SQL lite</span>
+                <!-- Projet 2 -->
+                <div class="project-card" data-project="biblio">
+                    <div class="project-image">
+                        <img src="images/biblio.png" alt="Application Mobile" class="project-photo">
+                        <div class="view-screenshots">
+                            <i class="fas fa-images"></i> Voir les captures
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://github.com/ahmedmasbah72/biblio-django" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        <!-- <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Démo</a> -->
+                    <div class="project-content">
+                        <h3>Biblio</h3>
+                        <p>Application de gestion des réservation au sein d'une bibliothèque.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">SQLite</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ahmedmasbah72/biblio-django" target="_blank" class="project-link" onclick="event.stopPropagation()">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Projet 3 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="images/tbda.png" alt="Dashboard Analytics" class="project-photo">
-                </div>
-                <div class="project-content">
-                    <h3>Site web E-comh3>
-                    <p>Tableau de bord analytique en temps réel avec visualisations interactives et rapports automatisés.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">Laravel</span>
-                        <span class="tech-tag">MySql</span>
+                <!-- Projet 3 -->
+                <div class="project-card" data-project="ecom">
+                    <div class="project-image">
+                        <img src="images/tbda.png" alt="Dashboard Analytics" class="project-photo">
+                        <div class="view-screenshots">
+                            <i class="fas fa-images"></i> Voir les captures
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://github.com/ahmedmasbah72/tabouda-coding" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a>
-                        <!-- <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Démo</a> -->
+                    <div class="project-content">
+                        <h3>Site web E-com</h3>
+                        <p>Tableau de bord analytique en temps réel avec visualisations interactives et rapports automatisés.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/ahmedmasbah72/tabouda-coding" target="_blank" class="project-link" onclick="event.stopPropagation()">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 
     <!-- Section Contact -->
     <section id="contact" class="contact">
@@ -293,21 +453,6 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <!-- <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Votre nom" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Votre email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Sujet" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Votre message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Envoyer le message</button>
-                    </form> -->
                     <form id="contact-form">
                         <div class="form-group">
                             <input type="text" name="user_name" placeholder="Votre nom" required>
@@ -323,16 +468,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Envoyer le message</button>
                         <input type="hidden" name="time">
-
                     </form>
-                    
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="relative bg-gradient-to-r from-blue-600 to-indigo-800 text-white pt-20 pb-10">
+    <footer class="relative bg-gradient-to-r from-blue-50 to-blue-200 text-gray-800 pt-20 pb-10">
         <!-- Wave divider -->
         <div class="footer-wave">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
@@ -344,36 +487,31 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-8 md:mb-0 text-center md:text-left">
                     <a href="#accueil" class="flex items-center justify-center md:justify-start">
-                        <img src="images/icon.png" alt="Logo Portfolio" class="h-50 w-40 mr-3">
-                        <!-- <span class="text-2xl font-bold">Ahmed Masbah</span> -->
+                        <img src="images/icon.png" alt="Logo Portfolio" class="h-70 w-60 mr-3">
                     </a>
-                    <!-- <p class="mt-4 max-w-md">Développeur digital passionné par la création de solutions web et mobile innovantes.</p> -->
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
                     <div>
                         <h3 class="text-lg font-semibold mb-4">Navigation</h3>
                         <ul class="space-y-2">
-                            <li><a href="#accueil" class="hover:text-blue-200 transition">Accueil</a></li>
-                            <li><a href="#apropos" class="hover:text-blue-200 transition">À propos</a></li>
-                            <li><a href="#competences" class="hover:text-blue-200 transition">Compétences</a></li>
-                            <li><a href="#projets" class="hover:text-blue-200 transition">Projets</a></li>
-                            <li><a href="#contact" class="hover:text-blue-200 transition">Contact</a></li>
+                            <li><a href="#accueil" class="hover:text-blue-800 transition">Accueil</a></li>
+                            <li><a href="#apropos" class="hover:text-blue-800 transition">À propos</a></li>
+                            <li><a href="#competences" class="hover:text-blue-800 transition">Compétences</a></li>
+                            <li><a href="#projets" class="hover:text-blue-800 transition">Projets</a></li>
+                            <li><a href="#contact" class="hover:text-blue-800 transition">Contact</a></li>
                         </ul>
                     </div>
                     
                     <div>
                         <h3 class="text-lg font-semibold mb-4">Liens utiles</h3>
                         <ul class="space-y-2">
-                            <li><a href="cv.html" target="_blank" class="hover:text-blue-200 transition">CV</a></li>
-                            <!-- <li><a href="#" class="hover:text-blue-200 transition">Blog</a></li>
-                            <li><a href="#" class="hover:text-blue-200 transition">Mentions légales</a></li>
-                            <li><a href="#" class="hover:text-blue-200 transition">Politique de confidentialité</a></li> -->
+                            <li><a href="cv.html" target="_blank" class="hover:text-blue-800 transition">CV</a></li>
                         </ul>
                     </div>
                     
                     <div class="col-span-2 md:col-span-1">
-                        <h3 class="text-lg font-semibold mb-4">Réseaux sociaux</h3>
+                        <h3 class="text-lg font-semibold mb-4" style="padding: 20px;">Réseaux sociaux</h3>
                         <div class="flex space-x-4 justify-center md:justify-start">
                             <a href="https://www.linkedin.com/in/ahmed-masbah-61186535b/" target="_blank" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
                                 <i class="fab fa-linkedin-in"></i>
@@ -381,37 +519,280 @@
                             <a href="https://github.com/ahmedmasbah72" target="_blank" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="https://x.com/AhmedMasbah10" target="_blank"  class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
+                            <a href="https://x.com/AhmedMasbah10" target="_blank" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="https://www.instagram.com/digital.horizon72/" target="_blank " class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
+                            <a href="https://www.instagram.com/digital.horizon72/" target="_blank" class="h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-blue-400 transition">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </div>
-                        <!-- <div class="mt-6">
-                            <h4 class="font-medium mb-2">Newsletter</h4>
-                            <div class="flex">
-                                <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l focus:outline-none text-gray-800 w-full">
-                                <button class="bg-blue-500 hover:bg-blue-400 px-4 py-2 rounded-r transition">
-                                    <i class="fas fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-blue-400 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
                 <p>&copy; 2025 Digital Horizon . Tous droits réservés.</p>
                 <div class="mt-4 md:mt-0">
-                    <a href="#" class="text-sm hover:text-blue-200 mr-4">Conditions d'utilisation</a>
-                    <a href="#" class="text-sm hover:text-blue-200">Politique de cookies</a>
+                    <a href="#" class="text-sm hover:text-blue-800 mr-4">Conditions d'utilisation</a>
+                    <a href="#" class="text-sm hover:text-blue-800">Politique de cookies</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Popup pour les screenshots -->
+    <div class="popup-overlay" id="screenshotPopup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3 class="popup-title" id="popupTitle">Screenshots du projet</h3>
+                <button class="close-btn" id="closePopup">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="popup-body">
+                <div class="project-description" id="popupDescription">
+                    Description détaillée du projet
+                </div>
+                <div class="screenshots-grid" id="screenshotsContainer">
+                    <!-- Les screenshots seront ajoutés ici dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Données des projets avec leurs screenshots
+        const projectsData = {
+            nce: {
+                title: "NCE-Admin",
+                description: "Cette plateforme complète permet aux entreprises de générer des devis professionnels en intégrant automatiquement les informations produits et leurs visuels. Le système offre une interface intuitive pour la gestion des catalogues, le calcul automatique des prix, et la génération de documents PDF personnalisés.",
+                screenshots: [
+                    {
+                        url: "images/nce-auth.png",
+                        caption: "La page principale d'authentification ."
+                    },
+                    {
+                        url: "images/nce-gest.png",
+                        caption: "Interface de gestion des produits et catalogues"
+                    },
+                    {
+                        url: "images/nce-dev.png",
+                        caption: "Module de création et génération de devis"
+                    },
+                    {
+                        url: "images/nce-pdf.png",
+                        caption: "Aperçu des devis générés en format PDF"
+                    }
+                ]
+            },
+            biblio: {
+                title: "Biblio - Gestion de Bibliothèque",
+                description: "Application mobile complète pour la gestion des réservations dans une bibliothèque. Elle permet aux utilisateurs de consulter le catalogue, réserver des livres, suivre leurs emprunts et aux bibliothécaires de gérer l'inventaire et les utilisateurs.",
+                screenshots: [
+                    {
+                        url: "images/biblio-main.png",
+                        caption: "Écran d'accueil avec navigation principale"
+                    },
+                    {
+                        url: "images/biblio-affi.png",
+                        caption: "Affichage des informations d'un livre"
+                    },
+                    {
+                        url: "images/biblio-res.png",
+                        caption: "Gestion des réservations utilisateur"
+                    },
+                    {
+                        url: "images/biblio-admin.png",
+                        caption: "Interface d'administration pour les bibliothécaires"
+                    }
+                ]
+            },
+            ecom: {
+                title: "Site web E-commerce ",
+                description: "Plateforme e-commerce moderne avec un puissant tableau de bord analytique. Le système offre des visualisations en temps réel des ventes, des insights sur le comportement client, et des rapports automatisés pour optimiser les performances commerciales.",
+                screenshots: [
+                    {
+                        url: "images/page-acc.png",
+                        caption: "Page d'accueil de la boutique en ligne"
+                    },
+                    {
+                        url: "images/admin.png",
+                        caption: "Tableau de bord analytique avec métriques en temps réel"
+                    },
+                    {
+                        url: "images/prod.png",
+                        caption: "Interface d'ajout des produits"
+                    },
+                    {
+                        url: "images/contact.png",
+                        caption: "Page du contact"
+                    }
+                ]
+            }
+        };
+
+        // Éléments du DOM
+        const popup = document.getElementById('screenshotPopup');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupDescription = document.getElementById('popupDescription');
+        const screenshotsContainer = document.getElementById('screenshotsContainer');
+        const closeBtn = document.getElementById('closePopup');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // Fonction pour ouvrir le popup
+        function openPopup(projectKey) {
+            const project = projectsData[projectKey];
+            if (!project) return;
+
+            // Mettre à jour le contenu du popup
+            popupTitle.textContent = project.title;
+            popupDescription.textContent = project.description;
+
+            // Vider le conteneur de screenshots
+            screenshotsContainer.innerHTML = '';
+
+            // Ajouter les screenshots
+            project.screenshots.forEach(screenshot => {
+                const screenshotDiv = document.createElement('div');
+                screenshotDiv.className = 'screenshot-item';
+                screenshotDiv.innerHTML = `
+                    <img src="${screenshot.url}" alt="${screenshot.caption}" class="screenshot-img">
+                    <div class="screenshot-caption">${screenshot.caption}</div>
+                `;
+                screenshotsContainer.appendChild(screenshotDiv);
+            });
+
+            // Afficher le popup
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fonction pour fermer le popup
+        function closePopup() {
+            popup.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Event listeners
+        projectCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const projectKey = card.getAttribute('data-project');
+                openPopup(projectKey);
+            });
+        });
+
+        closeBtn.addEventListener('click', closePopup);
+
+        // Fermer le popup en cliquant sur l'overlay
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+
+        // Fermer le popup avec la touche Échap
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && popup.classList.contains('active')) {
+                closePopup();
+            }
+        });
+
+        // Empêcher la propagation du clic sur le contenu du popup
+        document.querySelector('.popup-content').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Gestion du formulaire EmailJS
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("contact-form");
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                // Désactiver le bouton et changer le texte
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                
+                // Ajouter un timestamp au champ caché
+                form.querySelector('input[name="time"]').value = new Date().toLocaleString();
+                
+                emailjs.sendForm("service_clc8u6a", "template_dvpqq9b", form)
+                    .then(() => {
+                        // Succès
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
+                        submitBtn.style.backgroundColor = '#10b981';
+                        
+                        // Afficher un message de succès
+                        showNotification("Message envoyé avec succès !", "success");
+                        
+                        // Reset le formulaire après 2 secondes
+                        setTimeout(() => {
+                            form.reset();
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.style.backgroundColor = '';
+                        }, 2000);
+                    })
+                    .catch((err) => {
+                        // Erreur
+                        console.error('Erreur EmailJS:', err);
+                        submitBtn.innerHTML = '<i class="fas fa-times"></i> Erreur';
+                        submitBtn.style.backgroundColor = '#ef4444';
+                        
+                        // Afficher un message d'erreur
+                        showNotification("Erreur lors de l'envoi. Veuillez réessayer.", "error");
+                        
+                        // Restaurer le bouton après 3 secondes
+                        setTimeout(() => {
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnText;
+                            submitBtn.style.backgroundColor = '';
+                        }, 3000);
+                    });
+            });
+        });
+
+        // Fonction pour afficher les notifications
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            // Styles inline pour la notification
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : '#ef4444'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-weight: 500;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Supprimer la notification après 4 secondes
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+
+        // Script hamburger menu existant
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-menu");
 
